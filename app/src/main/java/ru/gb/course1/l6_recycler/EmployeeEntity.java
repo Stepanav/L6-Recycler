@@ -1,0 +1,110 @@
+package ru.gb.course1.l6_recycler;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class EmployeeEntity implements Parcelable {
+    private String id;
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    private int salary;
+    private String position;
+
+    public EmployeeEntity() {
+
+    }
+
+    public EmployeeEntity(String id, String name, String surname, String phoneNumber, int salary, String position) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.position = position;
+    }
+
+    protected EmployeeEntity(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        surname = in.readString();
+        phoneNumber = in.readString();
+        salary = in.readInt();
+        position = in.readString();
+    }
+
+    public static final Creator<EmployeeEntity> CREATOR = new Creator<EmployeeEntity>() {
+        @Override
+        public EmployeeEntity createFromParcel(Parcel in) {
+            return new EmployeeEntity(in);
+        }
+
+        @Override
+        public EmployeeEntity[] newArray(int size) {
+            return new EmployeeEntity[size];
+        }
+    };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(surname);
+        dest.writeString(phoneNumber);
+        dest.writeInt(salary);
+        dest.writeString(position);
+    }
+}
