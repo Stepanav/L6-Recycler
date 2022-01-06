@@ -2,11 +2,15 @@ package ru.gb.course1.l6_recycler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,31 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout listLinearLayout;
 
     private final ArrayList<EmployeeEntity> employeeList = new ArrayList<>();
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        employeeList.addAll(CreateDummyEmployeesData());
-
-        listLinearLayout = findViewById(R.id.list_linear_layout);
-
-        Button button = new Button(this);
-        button.setText("Привет");
-        listLinearLayout.addView(button);
-
-
-        for (EmployeeEntity employeeEntity : employeeList) {
-            View employeeItemView = getLayoutInflater().inflate(R.layout.item_employee, listLinearLayout, false);
-            ((TextView) employeeItemView.findViewById(R.id.name_text_view)).setText(employeeEntity.getName());
-            ((TextView) employeeItemView.findViewById(R.id.surname_text_view)).setText(employeeEntity.getSurname());
-            ((TextView) employeeItemView.findViewById(R.id.position_text_view)).setText(employeeEntity.getPosition());
-            listLinearLayout.addView(employeeItemView);
-        }
-
-    }
 
     private static ArrayList<EmployeeEntity> CreateDummyEmployeesData() {
         final ArrayList<EmployeeEntity> employeeEntities = new ArrayList<>();
@@ -97,5 +76,27 @@ public class MainActivity extends AppCompatActivity {
         ));
 
         return employeeEntities;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View rootView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        setContentView(rootView);
+
+        employeeList.addAll(CreateDummyEmployeesData());
+
+        listLinearLayout = findViewById(R.id.list_linear_layout);
+
+        Button button = ListViewUtils.createButtonView(this, v -> {
+            listLinearLayout.removeAllViews();
+
+        });
+        listLinearLayout.addView(button);
+
+        for (EmployeeEntity employeeEntity : employeeList) {
+            View employeeItemView = ListViewUtils.createItemView(this, getLayoutInflater(), listLinearLayout, employeeEntity);
+            listLinearLayout.addView(employeeItemView);
+        }
     }
 }
