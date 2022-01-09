@@ -8,11 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.gb.course1.l6_recycler.domain.EmployeeEntity;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
-    private ArrayList<EmployeeEntity> data = new ArrayList<>();
+    private List<EmployeeEntity> data = new ArrayList<>();
     private OnEmployeeListener onEmployeeListener;
 
 
@@ -20,7 +21,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
         this.onEmployeeListener = onEmployeeListener;
     }
 
-    public void setData(ArrayList<EmployeeEntity> employeeList) {
+    public void setData(List<EmployeeEntity> employeeList) {
         data = employeeList;
         notifyDataSetChanged();
     }
