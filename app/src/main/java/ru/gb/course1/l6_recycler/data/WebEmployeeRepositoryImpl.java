@@ -6,7 +6,7 @@ import java.util.List;
 import ru.gb.course1.l6_recycler.domain.EmployeeEntity;
 import ru.gb.course1.l6_recycler.domain.EmployeeRepository;
 
-class WebEmployeeRepositoryImpl implements EmployeeRepository {
+public class WebEmployeeRepositoryImpl implements EmployeeRepository {
 
     //здесь получаем данные из интернета
 
