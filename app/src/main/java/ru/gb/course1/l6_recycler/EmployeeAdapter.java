@@ -4,17 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> {
+public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
     private ArrayList<EmployeeEntity> data = new ArrayList<>();
+    private OnEmployeeDeleteListener onDeleteClickListener;
 
+
+    public void setOnDeleteClickListener(OnEmployeeDeleteListener onDeleteClickListener) {
+        this.onDeleteClickListener = onDeleteClickListener;
+    }
 
     public void setData(ArrayList<EmployeeEntity> employeeList) {
         data = employeeList;
@@ -25,16 +28,13 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
     @Override
     public EmployeeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View itemView = inflater.inflate(R.layout.item_employee, parent, false);
-        return new EmployeeViewHolder(itemView);
+        return new EmployeeViewHolder(inflater, parent, onDeleteClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EmployeeViewHolder holder, int position) {
         final EmployeeEntity employeeEntity = getItem(position);
-        holder.nameTextView.setText(employeeEntity.getName());
-        holder.surnameTextView.setText(employeeEntity.getSurname());
-        holder.positionTextView.setText(employeeEntity.getPosition());
+        holder.bind(getItem(position));
     }
 
     private EmployeeEntity getItem(int position) {
@@ -47,14 +47,5 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         return data.size();
     }
 
-    public static class EmployeeViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView = itemView.findViewById(R.id.name_text_view);
-        TextView surnameTextView = itemView.findViewById(R.id.surname_text_view);
-        TextView positionTextView = itemView.findViewById(R.id.position_text_view);
-        Button deleteButton = itemView.findViewById(R.id.delete_button);
 
-        public EmployeeViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-    }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -90,6 +91,26 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EmployeeAdapter();
         adapter.setData(employeeList);
+        adapter.setOnDeleteClickListener(employeeEntity -> {
+            deleteEmployee(employeeEntity);
+        });
+
         recyclerView.setAdapter(adapter);
+    }
+
+    private void deleteEmployee(EmployeeEntity employeeEntity) {
+        employeeList.remove(findPosition(employeeEntity));
+        adapter.setData(employeeList);
+
+        Toast.makeText(this, employeeEntity.getName() + "Fired", Toast.LENGTH_SHORT).show();
+    }
+
+    private int findPosition(EmployeeEntity employeeEntity) {
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeEntity.getId().equals(employeeList.get(i).getId())) {
+                return i;
+            }
+        }
+        throw new IllegalArgumentException("Нет такого элемента");
     }
 }
