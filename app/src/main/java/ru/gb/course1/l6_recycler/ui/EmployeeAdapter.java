@@ -1,8 +1,7 @@
-package ru.gb.course1.l6_recycler;
+package ru.gb.course1.l6_recycler.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,13 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ru.gb.course1.l6_recycler.domain.EmployeeEntity;
+
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
     private ArrayList<EmployeeEntity> data = new ArrayList<>();
-    private OnEmployeeDeleteListener onDeleteClickListener;
+    private OnEmployeeListener onEmployeeListener;
 
 
-    public void setOnDeleteClickListener(OnEmployeeDeleteListener onDeleteClickListener) {
-        this.onDeleteClickListener = onDeleteClickListener;
+    public void setOnDeleteClickListener(OnEmployeeListener onEmployeeListener) {
+        this.onEmployeeListener = onEmployeeListener;
     }
 
     public void setData(ArrayList<EmployeeEntity> employeeList) {
@@ -28,7 +29,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
     @Override
     public EmployeeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new EmployeeViewHolder(inflater, parent, onDeleteClickListener);
+        return new EmployeeViewHolder(inflater, parent, onEmployeeListener);
     }
 
     @Override
@@ -46,6 +47,4 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
 
         return data.size();
     }
-
-
 }

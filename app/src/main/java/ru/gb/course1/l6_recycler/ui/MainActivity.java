@@ -1,18 +1,18 @@
-package ru.gb.course1.l6_recycler;
+package ru.gb.course1.l6_recycler.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import ru.gb.course1.l6_recycler.domain.EmployeeEntity;
+import ru.gb.course1.l6_recycler.R;
+
+public class MainActivity extends AppCompatActivity implements OnEmployeeListener {
     private RecyclerView recyclerView;
     private EmployeeAdapter adapter;
 
@@ -91,18 +91,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EmployeeAdapter();
         adapter.setData(employeeList);
-        adapter.setOnDeleteClickListener(employeeEntity -> {
-            deleteEmployee(employeeEntity);
-        });
+        adapter.setOnDeleteClickListener(this);
 
         recyclerView.setAdapter(adapter);
-    }
-
-    private void deleteEmployee(EmployeeEntity employeeEntity) {
-        employeeList.remove(findPosition(employeeEntity));
-        adapter.setData(employeeList);
-
-        Toast.makeText(this, employeeEntity.getName() + "Fired", Toast.LENGTH_SHORT).show();
     }
 
     private int findPosition(EmployeeEntity employeeEntity) {
@@ -112,5 +103,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         throw new IllegalArgumentException("Нет такого элемента");
+    }
+
+    @Override
+    public void onDeleteEmployee(EmployeeEntity employeeEntity) {
+        employeeList.remove(findPosition(employeeEntity));
+        adapter.setData(employeeList);
+        Toast.makeText(this, employeeEntity.getName() + " Удален", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickEmployee(EmployeeEntity employeeEntity) {
+        Toast.makeText(this, employeeEntity.getName(), Toast.LENGTH_SHORT).show();
     }
 }
