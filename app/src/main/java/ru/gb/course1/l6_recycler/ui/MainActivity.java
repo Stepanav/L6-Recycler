@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnEmployeeListene
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-    if (requestCode == EMPLOYEE_REQUEST_CODE && resultCode == RESULT_OK) {
-        adapter.setData(employeeRepository.getEmployees());
+        if (requestCode == EMPLOYEE_REQUEST_CODE && resultCode == RESULT_OK) {
+            adapter.setData(employeeRepository.getEmployees());
+        }
     }
-}
 
 }

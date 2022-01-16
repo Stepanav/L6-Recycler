@@ -14,6 +14,8 @@ import ru.gb.course1.l6_recycler.domain.EmployeeEntity;
 public class EmployeeActivity extends AppCompatActivity {
     private TextView nameTextView;
     private Button deleteButton;
+    private Button saveButton;
+    private Button getButton;
 
     public static final String EMPLOYEE_EXTRA_KEY = "EMPLOYEE_EXTRA_KEY";
 
@@ -32,5 +34,7 @@ public class EmployeeActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         });
+
     }
+
 }
