@@ -15,11 +15,26 @@
         android:textSize="41sp"
         tools:text="Пётр" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="delete" />
+
+    <EditText
+        android:id="@+id/Edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="41sp"
+        tools:text="Пётр" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/safe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="safe" />
 
 </LinearLayout>

@@ -32,6 +32,5 @@ public class EmployeeActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         });
-
     }
 }
