@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="41sp"
+        tools:text="Пётр" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="delete" />
+
+    <EditText
+        android:id="@+id/data_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Введите текст"
+        android:textSize="41sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="saveData"
+        android:text="save" />
+
+    <TextView
+        android:id="@+id/data_view_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="41sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="getData"
+        android:text="Get data" />
+
+</LinearLayout>
